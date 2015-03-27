@@ -17,19 +17,24 @@ string queue::front()
 
 void queue::push(queue_element *node)
 {
+	cout<<node<<endl;
 	if(head == NULL)
 	{
 		head = node;
 		tail = node;
 		node->prev = NULL;
 		node->next = NULL;
+		cout<<"Push: Head is "<<head<<endl;
+		cout<<"Push: Tail is "<<tail<<endl;
 	}
 	else
 	{
 		tail->next = node;
 		node->prev = tail;
 		node->next = NULL;
-		tail = node;	
+		tail = node;
+		cout<<"Push: Head is "<<head->url<<endl;
+		cout<<"Push: Tail is "<<tail->url<<endl;	
 	}
 }
 void queue::pop()
@@ -62,7 +67,9 @@ int queue::send_to_end(queue_element *node)
 		tail->next = node;
 		node->prev = tail;
 		node->next = NULL;
-		tail = node;		
+		tail = node;	
+		cout<<"Head is now: "<<head->url<<endl;
+		cout<<"Tail is now: "<<tail->url<<endl;	
 		return 1;
 	}
 	else if(node == tail)			// The element is already at the end of the queue. Do nothing

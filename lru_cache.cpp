@@ -1,43 +1,7 @@
 
 #include <iostream>
-#include <string>
-#include <map>
-#include "lru_queue.h"
+#include "lru_cache.h"
 using namespace std;
-
-
-
-struct data_element
-{
-  size_t size;
-  size_t len;
-  char *data;
-};
-
-
-
-class lru_cache
-{ 
-	// Later change to private for vars
-	public:
-	int MAX_SIZE;
-	int size;
-	std::map<string, data_element> dictionary;
-	queue lru_queue;
-	std::map<string, queue_element*> queue_ptrs;
-
-	//public:
-	lru_cache();
-	lru_cache(int max);
-
-	int cache_isFull(data_element value);
-	int cache_find(string url);                         	// Returns 1 if found, 0 if not
-	int cache_get(string url, data_element *value);			// Returns 1 if found and sets value accordingly, 0 if not present.
-	int cache_fetch(string url, data_element *value);		// Returns 1 if found, sets value accordingly and moves to end of queue. Returns 0 if not present.
-	int cache_insert(string url, data_element value);		// Returns 1 if successful, 0 if not
-	int cache_remove(string url);							// Returns 1 if successful. 0 if not
-	string cache_decideReplace();
-};
 
 lru_cache::lru_cache()
 {
@@ -53,10 +17,6 @@ lru_cache::lru_cache(int max)
 
 int lru_cache::cache_isFull(data_element value)
 {
-	if(size == MAX_SIZE)
-	{
-		return 1;
-	}
 	if(size + value.size > MAX_SIZE)
 		return 1;
 
@@ -83,12 +43,14 @@ int lru_cache::cache_fetch(string url, data_element *value)
 
 int lru_cache::cache_insert(string url, data_element value)
 {
+	cout<<"In insert"<<endl;
 	if(cache_isFull(value))
 		return 0;	
-	
+	cout<<"here"<<endl;
 	dictionary[url] = value;
 	size = size + value.size;
 	queue_element *ptr = new queue_element();
+	ptr->url = url;
 	lru_queue.push(ptr);
 	queue_ptrs[url] = ptr;
 	return 1;
@@ -126,31 +88,57 @@ string lru_cache::cache_decideReplace()
 
 int main(int argc, char const *argv[])
 {
-	lru_cache r;
-	string url1 = "blah";
-	string url2 = "moreblah";
+	lru_cache r(50);
+	string url1 = "url1";
+	string url2 = "url2";
+	string url3 = "url3";
 	struct data_element elem1;
 	struct data_element elem2;
+	struct data_element elem3;
 	elem1.size = 10;
 	elem2.size = 30;
-	elem1.data = "hhh";
-	elem2.data = "jhhjkbfjf";
+	elem3.size = 300;
+	elem1.data = "string1";
+	elem2.data = "string2";
+	elem3.data = "string3";
 	elem1.len = 1;
 	elem2.len = 5;
+	elem3.len = 45;
 	struct data_element return_elem;
 	cout<<"Cache find (initial):"<<r.cache_find(url1)<<endl;
 	if(r.cache_insert(url1, elem1))
 		cout<<"Cache find (1):"<<r.cache_find(url1)<<endl;
-	cout<<"Cache find (2):"<<r.cache_find(url2)<<endl;
+	cout<<"Cache front and back: "<<r.lru_queue.front()<<"\t"<<r.lru_queue.tail->url<<endl;
+	if(r.cache_insert(url2, elem2))
+		cout<<"Cache find (2):"<<r.cache_find(url2)<<endl;
+	cout<<"Cache front and back: "<<r.lru_queue.front()<<"\t"<<r.lru_queue.tail->url<<endl;
+	if(r.cache_insert(url3, elem3))
+		cout<<"Cache find (3):"<<r.cache_find(url3)<<endl;
+	cout<<"Cache front and back: "<<r.lru_queue.front()<<"\t"<<r.lru_queue.tail->url<<endl;
 	// if(r.cache_fetch(url1, &return_elem))
+	//  	cout<<"Success";
+	// cout<<endl<<return_elem.size<<"\t"<<return_elem.len<<"\t"<<return_elem.data<<endl;
+	// cout<<r.lru_queue.front()<<endl;
+	// if(r.cache_fetch(url3, &return_elem))
 	// 	cout<<"Success";
 	// cout<<endl<<return_elem.size<<"\t"<<return_elem.len<<"\t"<<return_elem.data<<endl;
-	// if(r.cache_insert(url2, elem2))
-	// 	cout<<"Cache find (3):"<<r.cache_find(url2)<<endl;
+	// cout<<"Cache front and back: "<<r.lru_queue.front()<<"\t"<<r.lru_queue.tail->url<<endl;
+	// // if(r.cache_insert(url2, elem2))
+	// // 	cout<<"Cache find (3):"<<r.cache_find(url2)<<endl;
 	// string remove_url = r.cache_decideReplace();
 	// cout<<remove_url<<endl;
 	// r.cache_remove(remove_url);
 	// cout<<"Removed url is present? "<<r.cache_find(remove_url)<<endl;
-
+	// cout<<"Cache front and back: "<<r.lru_queue.front()<<"\t"<<r.lru_queue.tail->url<<endl;
+	// remove_url = r.cache_decideReplace();
+	// cout<<remove_url<<endl;
+	// r.cache_remove(remove_url);
+	// cout<<"Removed url is present? "<<r.cache_find(remove_url)<<endl;
+	// cout<<"Cache front and back: "<<r.lru_queue.front()<<"\t"<<r.lru_queue.tail->url<<endl;
+	// remove_url = r.cache_decideReplace();
+	// cout<<remove_url<<endl;
+	// r.cache_remove(remove_url);
+	// cout<<"Removed url is present? "<<r.cache_find(remove_url)<<endl;
+	// cout<<"Cache front and back: "<<r.lru_queue.front();//<<"\t"<<r.lru_queue.tail->url<<endl;
 	return 0;
 }
