@@ -14,7 +14,6 @@ struct queue_element
 
 class queue
 {
-public:
 	queue_element *head;
 	queue_element *tail;
 
