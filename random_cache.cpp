@@ -5,17 +5,21 @@
 
 random_cache::random_cache()
 {
-	MAX_SIZE = CACHE_MAX_SIZE;
 	num_entries = 0;
 	size = 0;
+	MAX_SIZE = CACHE_MAX_SIZE;
+	MAX_NUM_ENTRIES = CACHE_MAX_SIZE/MIN_FILE_SIZE;
+	urls = new string[MAX_NUM_ENTRIES];
 	srand(time(NULL));
 }
 
 random_cache::random_cache(size_t max)
 {
-	MAX_SIZE = max;
 	num_entries = 0;
 	size = 0;
+	MAX_SIZE = max;
+	MAX_NUM_ENTRIES = max/MIN_FILE_SIZE;
+	urls = new string[MAX_NUM_ENTRIES];
 	srand(time(NULL));
 }
 
@@ -54,12 +58,15 @@ int random_cache::cache_fetch(string url, wd_in *value)
 int random_cache::cache_insert(string url, wd_in value)
 {
 	cout<<"In cache_insert"<<endl;
-	if(value.size > MAX_SIZE)
+	if(value.size > MAX_SIZE || num_entries == MAX_NUM_ENTRIES)
 		return 0;
 	while(cache_isFull(value.size))
 	{
 		cache_remove(cache_decideReplace());
 	}
+	char *data;
+	strcpy(data, value.data);
+	value.data = data;
 	dictionary[url] = value;
 	size = size + value.size;
 	urls[num_entries] = url;
@@ -79,7 +86,6 @@ int random_cache::cache_remove(int index)
 	
 	dictionary.erase(url);
 	urls[index] = urls[num_entries-1];
-	urls.erase(num_entries-1);
 	num_entries--;
 	return 1;
 }
