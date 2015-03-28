@@ -60,8 +60,6 @@ int fetch_url(std::string input_url, wd_in& curl_return) {
   curl_return = wdi;
   printf("\nSize : %zu",wdi.size);
   printf("\tLength : %zu \n",wdi.len);
-  /* cleanup wdi.data buffer. */
-  free(wdi.data);
-
+  /* cleanup wdi.data buffer after passing to client. */
   return res;
 }

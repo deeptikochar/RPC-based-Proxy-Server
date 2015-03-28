@@ -59,15 +59,13 @@ class HTTPproxyHandler : virtual public HTTPproxyIf {
             _return.document = cache_entry.data;        }
           else
           {
-            std::cout<<"reached id 3\n";
             _return.response_code = 3;
-            std::cout<<"reached id 3-2\n";
-            std::cout<<cache_entry.data<<"\n";
             _return.document = cache_entry.data;
-            std::cout<<"reached id 3 - 3\n";
           }
         }
     }
+    /*Free curl data buffer*/
+    free(cache_entry.data);
     std::cout<<"Requested URL is : "<<url<<"\n";
   }
 
