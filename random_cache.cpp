@@ -5,7 +5,7 @@
 
 random_cache::random_cache()
 {
-	MAX_SIZE = 1024;
+	MAX_SIZE = CACHE_MAX_SIZE;
 	num_entries = 0;
 	size = 0;
 	srand(time(NULL));

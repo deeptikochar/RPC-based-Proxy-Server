@@ -4,7 +4,7 @@
 
 fifo_cache::fifo_cache()
 {
-	MAX_SIZE = 1024;
+	MAX_SIZE = CACHE_MAX_SIZE;
 	size = 0;
 }
 

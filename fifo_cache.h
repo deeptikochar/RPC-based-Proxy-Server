@@ -1,13 +1,15 @@
 #ifndef fifo_cache_H
 #define fifo_cache_H
 
+ifndef CACHE_MAX_SIZE
+#define CACHE_MAX_SIZE 1048576
+#endif
+
 #include <string>
 #include <map>
 #include <queue>
 #include "wd_in.h"
 using namespace std;
-
-
 
 class fifo_cache
 { 

@@ -1,6 +1,10 @@
 #ifndef lru_cache_H
 #define lru_cache_H
 
+ifndef CACHE_MAX_SIZE
+#define CACHE_MAX_SIZE 1048576
+#endif
+
 #include <string>
 #include <map>
 #include "lru_queue.h"
