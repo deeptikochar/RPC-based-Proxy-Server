@@ -1,14 +1,8 @@
 #include <string>
 #include <map>
+#include "wd_in.h"
 
 using namespace std;
-
-struct data_element
-{
-  size_t size;
-  size_t len;
-  char *data;
-};
 
 class random_cache
 { 
@@ -16,15 +10,15 @@ class random_cache
 	int num_entries;
 	int MAX_SIZE;
 	int size;
-	std::map<string, data_element> dictionary;
+	std::map<string, wd_in> dictionary;
 	std::map<int, string> urls;
 
 	public:
 	random_cache();
 	random_cache(int max);
 
-	int cache_fetch(string url, data_element *value);		// Returns 1 if found and sets value accordingly, 0 if not present.
-	int cache_insert(string url, data_element value);		// Returns 1 if successful, 0 if not
+	int cache_fetch(string url, wd_in *value);		// Returns 1 if found and sets value accordingly, 0 if not present.
+	int cache_insert(string url, wd_in value);		// Returns 1 if successful, 0 if not
 
 	private:
 	int cache_isFull(int data_size);						// Returns 1 if full, 0 if not

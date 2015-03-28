@@ -31,7 +31,7 @@ int lru_cache::cache_find(string url)
 	return 1;
 }
 
-int lru_cache::cache_fetch(string url, data_element *value)
+int lru_cache::cache_fetch(string url, wd_in *value)
 {
 	if(cache_get(url, value))
 	{
@@ -41,7 +41,7 @@ int lru_cache::cache_fetch(string url, data_element *value)
 	return 0;
 }
 
-int lru_cache::cache_insert(string url, data_element value)
+int lru_cache::cache_insert(string url, wd_in value)
 {
 	if(value.size > MAX_SIZE)
 		return 0;
@@ -58,11 +58,11 @@ int lru_cache::cache_insert(string url, data_element value)
 	return 1;
 }
 
-int lru_cache::cache_get(string url, data_element *value)
+int lru_cache::cache_get(string url, wd_in *value)
 {
 	if(cache_find(url))
 	{
-		data_element val = dictionary[url];
+		wd_in val = dictionary[url];
 		value->size = val.size;
 		value->len = val.len;
 		value->data = val.data;
@@ -73,7 +73,7 @@ int lru_cache::cache_get(string url, data_element *value)
 
 int lru_cache::cache_remove(string url)
 {
-	data_element temp;
+	wd_in temp;
 	if(cache_get(url, &temp) == 0)
 		return 0;
 	size = size - temp.size;
@@ -94,9 +94,9 @@ int main(int argc, char const *argv[])
 	// string url1 = "url1";
 	// string url2 = "url2";
 	// string url3 = "url3";
-	// struct data_element elem1;
-	// struct data_element elem2;
-	// struct data_element elem3;
+	// struct wd_in elem1;
+	// struct wd_in elem2;
+	// struct wd_in elem3;
 	// elem1.size = 30;
 	// elem2.size = 30;
 	// elem3.size = 50;
@@ -106,7 +106,7 @@ int main(int argc, char const *argv[])
 	// elem1.len = 1;
 	// elem2.len = 5;
 	// elem3.len = 45;
-	// struct data_element return_elem;
+	// struct wd_in return_elem;
 	// cout<<"Cache find (initial):"<<r.cache_find(url1)<<endl;
 	// if(r.cache_insert(url1, elem1))
 	// 	cout<<"Cache find (1):"<<r.cache_find(url1)<<endl;

@@ -35,11 +35,11 @@ int random_cache::cache_find(string url)
 	return 1;
 }
 
-int random_cache::cache_fetch(string url, data_element *value)
+int random_cache::cache_fetch(string url, wd_in *value)
 {
 	if(cache_find(url))
 	{
-		data_element val = dictionary.find(url)->second;
+		wd_in val = dictionary.find(url)->second;
 		value->size = val.size;
 		value->len = val.len;
 		value->data = val.data;
@@ -48,7 +48,7 @@ int random_cache::cache_fetch(string url, data_element *value)
 	return 0;
 }
 
-int random_cache::cache_insert(string url, data_element value)
+int random_cache::cache_insert(string url, wd_in value)
 {
 	if(value.size > MAX_SIZE)
 		return 0;
@@ -67,7 +67,7 @@ int random_cache::cache_insert(string url, data_element value)
 int random_cache::cache_remove(int index)
 {
 	string url = urls[index];
-	data_element temp;
+	wd_in temp;
 	if(cache_fetch(url, &temp) == 0)
 		return 0;
 	size = size - temp.size;
@@ -91,9 +91,9 @@ int main(int argc, char const *argv[])
 	// const string url1 = "url1";
 	// const string url2 = "url2";
 	// const string url3 = "url3";
-	// struct data_element elem1;
-	// struct data_element elem2;
-	// struct data_element elem3;
+	// struct wd_in elem1;
+	// struct wd_in elem2;
+	// struct wd_in elem3;
 	// elem1.size = 10;
 	// elem2.size = 30;
 	// elem3.size = 50;
@@ -103,7 +103,7 @@ int main(int argc, char const *argv[])
 	// elem1.len = 31;
 	// elem2.len = 10;
 	// elem3.len = 600;
-	// struct data_element return_elem;
+	// struct wd_in return_elem;
 	// cout<<"Cache find (initial):"<<r.cache_find(url1)<<endl;
 	// if(r.cache_insert(url1, elem1))
 	// 	cout<<"Cache find (1):"<<r.cache_find(url1)<<endl;
