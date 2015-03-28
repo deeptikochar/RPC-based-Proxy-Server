@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
   try {
 	  
 	  transport->open();
-	  client.request(serverResponse, "http://test.input.url");
+	  client.request(serverResponse, "http://www.yahoo.com");
     std::cout<<"The returned response document is:\n"<<serverResponse.document;
     std::cout<<"\nThe response code is: "<<serverResponse.response_code<<"\n";
     client.shutdown();

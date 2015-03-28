@@ -8,7 +8,7 @@
 #include <thrift/transport/TBufferTransports.h>
 #include <iostream>
 
-#include "curl_fetch.h"
+#include "../curl_fetch.h"
 
 using namespace ::apache::thrift;
 using namespace ::apache::thrift::protocol;
@@ -27,9 +27,7 @@ class HTTPproxyHandler : virtual public HTTPproxyIf {
 
   void request(response& _return, const std::string& url) {
     _return.response_code = 7;
-    _return.document = "Sample HTML response\n<html>\n\t<head>"
-            "\n\t\tThis is the head\n\t</head>\n</html>\n";
-    fetch_url("http://www.google.com");
+    fetch_url(url,_return.document);
     std::cout<<"Requested URL is : "<<url<<"\n";
   }
 
