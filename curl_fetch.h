@@ -14,6 +14,6 @@
    called with each chunk.  */
 static size_t write_data(void *buffer, size_t size, 
                          size_t nmemb, wd_in *userp);
-int fetch_url(std::string input_url, std::string &curl_return) ;
+int fetch_url(std::string input_url, wd_in &curl_return) ;
 
 #endif

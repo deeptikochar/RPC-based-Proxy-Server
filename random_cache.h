@@ -11,20 +11,20 @@ class random_cache
 { 
 	// Later change to private for vars
 	int num_entries;
-	int MAX_SIZE;
-	int size;
+	size_t MAX_SIZE;
+	size_t size;
 	std::map<string, wd_in> dictionary;
 	std::map<int, string> urls;
 
 	public:
 	random_cache();
-	random_cache(int max);
+	random_cache(size_t max);
 
 	int cache_fetch(string url, wd_in *value);		// Returns 1 if found and sets value accordingly, 0 if not present.
 	int cache_insert(string url, wd_in value);		// Returns 1 if successful, 0 if not
 
 	private:
-	int cache_isFull(int data_size);						// Returns 1 if full, 0 if not
+	int cache_isFull(size_t data_size);						// Returns 1 if full, 0 if not
 	int cache_find(string url);                         	// Returns 1 if found, 0 if not	
 	int cache_remove(int index);							// Returns 1 if successful. 0 if not
 	int cache_decideReplace();								// Decides which cache entry to replace

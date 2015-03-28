@@ -28,9 +28,9 @@ int main(int argc, char **argv) {
     std::string entry;
     while(infile>>entry){
   	  client.request(serverResponse, entry);
-      std::cout<<"The returned response document is:\n"
-                "URL: "<<entry<<"\n"<<serverResponse.document;
-      std::cout<<"\nThe response code is: "<<serverResponse.response_code<<"\n";
+      std::cout<<"URL: "<<entry<<"\n"
+                "The returned response document is:\n"<<serverResponse.document;
+      std::cout<<"\nResponse code : "<<serverResponse.response_code<<"\n";
     }
     infile.close();
     client.shutdown();

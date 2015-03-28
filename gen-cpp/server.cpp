@@ -9,6 +9,7 @@
 #include <iostream>
 
 #include "../curl_fetch.h"
+#include "../random_cache.h"
 
 using namespace ::apache::thrift;
 using namespace ::apache::thrift::protocol;
@@ -19,6 +20,9 @@ using boost::shared_ptr;
 
 using namespace  ::proxyspace;
 
+random_cache cache(70000);
+
+
 class HTTPproxyHandler : virtual public HTTPproxyIf {
  public:
   HTTPproxyHandler() {
@@ -26,8 +30,44 @@ class HTTPproxyHandler : virtual public HTTPproxyIf {
   }
 
   void request(response& _return, const std::string& url) {
+    /*
+    Error codes :
+    0 - Cache miss. Curl could not fetch document
+    1 - Cache hit !
+    2 - Cache miss. Cache updated with document.
+    3 - Cache miss. Curl fetch successful but document cannot fit in cache. 
+    */
     _return.response_code = 7;
-    fetch_url(url,_return.document);
+    wd_in cache_entry;
+    if(cache.cache_fetch(url, &cache_entry))
+    {
+        _return.response_code = 1;
+        _return.document = cache_entry.data;
+    }
+    else
+    {
+        if(fetch_url(url,cache_entry))
+        {
+          _return.response_code = 0;
+          _return.document = "";
+        }
+        else
+        {
+           if(cache.cache_insert(url, cache_entry))
+          {
+            _return.response_code = 2;
+            _return.document = cache_entry.data;        }
+          else
+          {
+            std::cout<<"reached id 3\n";
+            _return.response_code = 3;
+            std::cout<<"reached id 3-2\n";
+            std::cout<<cache_entry.data<<"\n";
+            _return.document = cache_entry.data;
+            std::cout<<"reached id 3 - 3\n";
+          }
+        }
+    }
     std::cout<<"Requested URL is : "<<url<<"\n";
   }
 

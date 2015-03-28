@@ -19,7 +19,7 @@ static size_t write_data(void *buffer, size_t size,
   return size * nmemb;
 }
 
-int fetch_url(std::string input_url, std::string& curl_return) {
+int fetch_url(std::string input_url, wd_in& curl_return) {
   CURL *curl;
   CURLcode res;
   struct wd_in wdi;
@@ -33,7 +33,6 @@ int fetch_url(std::string input_url, std::string& curl_return) {
     wdi.size = 1024;
     /* Check for malloc failure in real code. */
     wdi.data = (char*) malloc(wdi.size);
-
     /*Allow redirection*/
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
     /* Set the URL for the operation. */
@@ -58,11 +57,11 @@ int fetch_url(std::string input_url, std::string& curl_return) {
      of the data available, so do whatever. */
 
   /* Write the content to stdout. */
-  curl_return = wdi.data;
-  printf("\nThe size is %zu",wdi.size);
-  printf("\nThe len is %zu \n",wdi.len);
+  curl_return = wdi;
+  printf("\nSize : %zu",wdi.size);
+  printf("\tLength : %zu \n",wdi.len);
   /* cleanup wdi.data buffer. */
   free(wdi.data);
 
-  return EXIT_SUCCESS;
+  return res;
 }
