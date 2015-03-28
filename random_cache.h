@@ -1,3 +1,6 @@
+#ifndef random_cache_H
+#define random_cache_H
+
 #include <string>
 #include <map>
 #include "wd_in.h"
@@ -26,3 +29,5 @@ class random_cache
 	int cache_remove(int index);							// Returns 1 if successful. 0 if not
 	int cache_decideReplace();								// Decides which cache entry to replace
 };
+
+#endif

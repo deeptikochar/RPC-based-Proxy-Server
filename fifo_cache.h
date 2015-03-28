@@ -1,3 +1,6 @@
+#ifndef fifo_cache_H
+#define fifo_cache_H
+
 #include <string>
 #include <map>
 #include <queue>
@@ -26,3 +29,5 @@ class fifo_cache
 	int cache_remove(string url);							// Returns 1 if successful. 0 if not
 	string cache_decideReplace();
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef lru_queue_H
+#define lru_queue_H
+
 #include <string>
 using namespace std;
 struct queue_element
@@ -24,3 +27,5 @@ class queue
 	void pop();
 	int send_to_end(queue_element *node);
 };
+
+#endif
