@@ -3,7 +3,7 @@
 /* This function is registered as a callback with CURL.  As the data
    from the requested webpage is returned in chunks, write_data is
    called with each chunk.  */
-static size_t write_data(void *buffer, size_t size, 
+size_t write_data(void *buffer, size_t size, 
                          size_t nmemb, wd_in *userp) {
   struct wd_in *wdi = userp;
 
