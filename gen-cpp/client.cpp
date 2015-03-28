@@ -7,6 +7,7 @@
 #include <thrift/transport/TTransportUtils.h>
 #include <stdio.h>
 #include <iostream>
+#include <fstream>
 
 using namespace apache::thrift;
 using namespace apache::thrift::protocol;
@@ -23,9 +24,15 @@ int main(int argc, char **argv) {
   try {
 	  
 	  transport->open();
-	  client.request(serverResponse, "http://www.yahoo.com");
-    std::cout<<"The returned response document is:\n"<<serverResponse.document;
-    std::cout<<"\nThe response code is: "<<serverResponse.response_code<<"\n";
+    std::ifstream infile("../url.list");
+    std::string entry;
+    while(infile>>entry){
+  	  client.request(serverResponse, entry);
+      std::cout<<"The returned response document is:\n"
+                "URL: "<<entry<<"\n"<<serverResponse.document;
+      std::cout<<"\nThe response code is: "<<serverResponse.response_code<<"\n";
+    }
+    infile.close();
     client.shutdown();
 	  transport->close();
   } catch (TException& tx) {
