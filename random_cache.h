@@ -5,6 +5,8 @@ ifndef CACHE_MAX_SIZE
 #define CACHE_MAX_SIZE 1048576
 #endif
 
+#define MIN_FILE_SIZE 10000
+
 #include <string>
 #include <map>
 #include "wd_in.h"
@@ -15,10 +17,11 @@ class random_cache
 { 
 	// Later change to private for vars
 	int num_entries;
+	int MAX_NUM_ENTRIES;
 	size_t MAX_SIZE;
 	size_t size;
 	std::map<string, wd_in> dictionary;
-	std::map<int, string> urls;
+	string *urls;
 
 	public:
 	random_cache();
