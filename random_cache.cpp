@@ -64,8 +64,6 @@ int random_cache::cache_insert(string url, wd_in value)
 	{
 		cache_remove(cache_decideReplace());
 	}
-	char *data;
-	strcpy(data, value.data);
 	value.data = data;
 	dictionary[url] = value;
 	size = size + value.size;

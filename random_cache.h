@@ -15,7 +15,6 @@ using namespace std;
 
 class random_cache
 { 
-	// Later change to private for vars
 	int num_entries;
 	int MAX_NUM_ENTRIES;
 	size_t MAX_SIZE;
