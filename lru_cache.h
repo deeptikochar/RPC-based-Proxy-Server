@@ -8,13 +8,12 @@ ifndef CACHE_MAX_SIZE
 #include <string>
 #include <map>
 #include "lru_queue.h"
-#include "wd_in.h"
 
 class lru_cache
 { 
 	int MAX_SIZE;
 	int size;
-	std::map<string, wd_in> dictionary;
+	std::map<string, string> dictionary;
 	queue lru_queue;
 	std::map<string, queue_element*> queue_ptrs;
 
@@ -22,14 +21,14 @@ class lru_cache
 	lru_cache();
 	lru_cache(int max);
 
-	int cache_fetch(string url, wd_in *value);		// Returns 1 if found, sets value accordingly and moves to end of queue. Returns 0 if not present.
-	int cache_insert(string url, wd_in value);		// Returns 1 if successful, 0 if not
+	int cache_fetch(string url, string &value);			// Returns 1 if found, sets value accordingly and moves to end of queue. Returns 0 if not present.
+	int cache_insert(string url, string value);			// Returns 1 if successful, 0 if not
 
 	private:
 	int cache_isFull(int data_size);
-	int cache_find(string url);                         	// Returns 1 if found, 0 if not
-	int cache_get(string url, wd_in *value);			// Returns 1 if found and sets value accordingly, 0 if not present.
-	int cache_remove(string url);							// Returns 1 if successful. 0 if not
+	int cache_find(string url);                        	// Returns 1 if found, 0 if not
+	int cache_get(string url, string &value);			// Returns 1 if found and sets value accordingly, 0 if not present.
+	int cache_remove(string url);						// Returns 1 if successful. 0 if not
 	string cache_decideReplace();
 };
 
