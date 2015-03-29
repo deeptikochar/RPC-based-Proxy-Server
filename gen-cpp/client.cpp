@@ -76,7 +76,7 @@ void statistics::tally(){
   std::cout<<"\nAverage failure time = "<<((fail_count==0)? 0:(fail_time/fail_count));
   std::cout<<"\nOverall average miss time = "<<((miss_count+cap_exceed_count==0)? 0:((miss_time + exceed_time)/(miss_count+cap_exceed_count)));
   std::cout<<"\n\n==================  Key statistics  ==============\n"
-             "Hit rate = "<<hit_count/(hit_count+miss_count+fail_count+cap_exceed_count);
+             "Hit rate = "<<(float)hit_count/(hit_count+miss_count+fail_count+cap_exceed_count);
   std::cout<<"\nMiss penalty = "<<((miss_count+cap_exceed_count==0)? 0:(((miss_time + exceed_time)/(miss_count+cap_exceed_count))- ((hit_count==0)? 0:(hit_time/hit_count))));
   std::cout<<"\nAverage access time (AAT) = "<<(miss_time + exceed_time + hit_time)/ (miss_count+cap_exceed_count+hit_count);
   std::cout<<"\n==================================================\n\n";        
