@@ -9,7 +9,7 @@ ifndef CACHE_MAX_SIZE
 
 #include <string>
 #include <map>
-#include "wd_in.h"
+// #include "wd_in.h"
 
 using namespace std;
 
@@ -19,15 +19,15 @@ class random_cache
 	int MAX_NUM_ENTRIES;
 	size_t MAX_SIZE;
 	size_t size;
-	std::map<string, wd_in> dictionary;
+	std::map<string, string> dictionary;
 	string *urls;
 
 	public:
 	random_cache();
 	random_cache(size_t max);
 
-	int cache_fetch(string url, wd_in *value);		// Returns 1 if found and sets value accordingly, 0 if not present.
-	int cache_insert(string url, wd_in value);		// Returns 1 if successful, 0 if not
+	int cache_fetch(string url, string &value);		// Returns 1 if found and sets value accordingly, 0 if not present.
+	int cache_insert(string url, string value);		// Returns 1 if successful, 0 if not
 
 	private:
 	int cache_isFull(size_t data_size);						// Returns 1 if full, 0 if not

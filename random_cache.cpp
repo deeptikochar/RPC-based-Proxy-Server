@@ -35,38 +35,35 @@ int random_cache::cache_isFull(size_t data_size)
 int random_cache::cache_find(string url)
 {
 	cout<<"In cache_find"<<endl;
-	//Check if url is a key in the map
+	//Check if url is a key in the map. Returns 0 or 1
 	if(dictionary.count(url) == 0)
 		return 0;
 	return 1;
 }
 
-int random_cache::cache_fetch(string url, wd_in *value)
+int random_cache::cache_fetch(string url, string &value)
 {
 	cout<<"In cache_fetch"<<endl;
 	if(cache_find(url))
 	{
-		wd_in val = dictionary.find(url)->second;
-		value->size = val.size;
-		value->len = val.len;
-		value->data = val.data;
+		value = dictionary[url];
 		return 1;
 	}
 	return 0;
 }
 
-int random_cache::cache_insert(string url, wd_in value)
+int random_cache::cache_insert(string url, string value)
 {
 	cout<<"In cache_insert"<<endl;
-	if(value.size > MAX_SIZE || num_entries == MAX_NUM_ENTRIES)
+	size_t data_size = value.length();
+	if(data_size > MAX_SIZE || num_entries == MAX_NUM_ENTRIES)
 		return 0;
-	while(cache_isFull(value.size))
+	while(cache_isFull(data_size))
 	{
 		cache_remove(cache_decideReplace());
 	}
-	value.data = data;
 	dictionary[url] = value;
-	size = size + value.size;
+	size = size + data_size;
 	urls[num_entries] = url;
 	num_entries++;
 	return 1;
@@ -77,10 +74,10 @@ int random_cache::cache_remove(int index)
 {
 	cout<<"In cache_remove"<<endl;
 	string url = urls[index];
-	wd_in temp;
+	string temp;
 	if(cache_fetch(url, &temp) == 0)
 		return 0;
-	size = size - temp.size;
+	size = size - temp.length();
 	
 	dictionary.erase(url);
 	urls[index] = urls[num_entries-1];
