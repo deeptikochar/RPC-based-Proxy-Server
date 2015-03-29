@@ -8,14 +8,82 @@
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
-
+#include <sys/time.h>
 using namespace apache::thrift;
 using namespace apache::thrift::protocol;
 using namespace apache::thrift::transport;
 
 using namespace  ::proxyspace;
 
+class statistics {
+private:
+  struct timeval tim;
+  long hit_count;         // Cache hit.
+  long miss_count;        // Cache miss. Added to cache.
+  long fail_count;        // Curl failed to fetch document.
+  long cap_exceed_count;  // Cache miss. Document exceeds cache size.
+  double hit_time, miss_time, fail_time, exceed_time;
+  double time_int;        // To measure time interval in ms.
+public:
+  statistics();
+  void issue();
+  void receive(int response);
+  void tally();
+};
+
+statistics::statistics(){
+  hit_count=miss_count=fail_count=cap_exceed_count=0L;
+  hit_time=miss_time=fail_time=exceed_time=0;
+}
+void statistics::issue(){
+  gettimeofday(&tim, NULL);  
+    time_int = tim.tv_sec+(tim.tv_usec/1000000.0); 
+}
+void statistics::receive(int response){
+  gettimeofday(&tim, NULL);  
+    time_int = (tim.tv_sec+(tim.tv_usec/1000000.0)) - time_int;
+    switch(response){
+      case 0 : 
+          fail_count++;
+          fail_time += time_int;
+          break;
+      case 1 : 
+          hit_count++;
+          hit_time += time_int;
+          break;
+      case 2 : 
+          miss_count++;
+          miss_time += time_int;
+          break;
+      case 3 : 
+          cap_exceed_count++;
+          exceed_time += time_int;
+          break;
+    } 
+}
+void statistics::tally(){
+  std::cout<<"\n==================================================\n"
+             "==================  Run statistics  ==============\n"
+             "==================================================\n"
+             "Total requests = "<<hit_count+miss_count+fail_count+cap_exceed_count;
+  std::cout<<"\nHit count = "<<hit_count<<"\nMiss count = "<<miss_count;
+  std::cout<<"\nCache capacity exceed count = "<<cap_exceed_count;
+  std::cout<<"\nFailed requests = "<<fail_count<<"\n";
+  std::cout<<"\nTotal time = "<<hit_time+miss_time+exceed_time+fail_time;
+  std::cout<<"\nAverage hit time = "<<((hit_count==0)? 0:(hit_time/hit_count));
+  std::cout<<"\nAverage miss time = "<<((miss_count==0)? 0:(miss_time/miss_count));
+  std::cout<<"\nAverage exceed time = "<<((cap_exceed_count==0)? 0:(exceed_time/cap_exceed_count));
+  std::cout<<"\nAverage failure time = "<<((fail_count==0)? 0:(fail_time/fail_count));
+  std::cout<<"\nOverall average miss time = "<<((miss_count+cap_exceed_count==0)? 0:((miss_time + exceed_time)/(miss_count+cap_exceed_count)));
+  std::cout<<"\n\n==================  Key statistics  ==============\n"
+             "Hit rate = "<<hit_count/(hit_count+miss_count+fail_count+cap_exceed_count);
+  std::cout<<"\nMiss penalty = "<<((miss_count+cap_exceed_count==0)? 0:(((miss_time + exceed_time)/(miss_count+cap_exceed_count))- ((hit_count==0)? 0:(hit_time/hit_count))));
+  std::cout<<"\nAverage access time (AAT) = "<<(miss_time + exceed_time + hit_time)/ (miss_count+cap_exceed_count+hit_count);
+  std::cout<<"\n==================================================\n\n";        
+}
+
 int main(int argc, char **argv) {
+  statistics stats;
   boost::shared_ptr<TTransport> socket(new TSocket("localhost", 9090));
   boost::shared_ptr<TTransport> transport(new TBufferedTransport(socket));
   boost::shared_ptr<TProtocol> protocol(new TBinaryProtocol(transport));
@@ -27,10 +95,12 @@ int main(int argc, char **argv) {
     std::ifstream infile("../url.list");
     std::string entry;
     while(infile>>entry){
+      stats.issue();
   	  client.request(serverResponse, entry);
-      std::cout<<"URL: "<<entry<<"\n"
-                "The returned response document is:\n"<<serverResponse.document;
-      std::cout<<"\nResponse code : "<<serverResponse.response_code<<"\n";
+      stats.receive(serverResponse.response_code);
+      std::cout<<"URL: "<<entry<<"\n";
+      //           "The returned response document is:\n"<<serverResponse.document;
+      // std::cout<<"\nResponse code : "<<serverResponse.response_code<<"\n";
     }
     infile.close();
     client.shutdown();
@@ -38,6 +108,7 @@ int main(int argc, char **argv) {
   } catch (TException& tx) {
   std::cout << "ERROR: " << tx.what() <<std::endl;
   }
+  stats.tally();
   // Check TException import and use !
   return 0;
 }
