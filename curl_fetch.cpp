@@ -35,6 +35,8 @@ int fetch_url(std::string input_url, std::string& curl_return) {
     wdi.data = (char*) malloc(wdi.size);
     /*Allow redirection*/
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+    /*Timeout for connections, in seconds*/
+    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 30L);
     /* Set the URL for the operation. */
     curl_easy_setopt(curl, CURLOPT_URL, input_url.c_str());
     /* "write_data" function to call with returned data. */
