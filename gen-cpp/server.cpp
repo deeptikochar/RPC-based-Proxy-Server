@@ -10,6 +10,8 @@
 
 #include "../curl_fetch.h"
 #include "../random_cache.h"
+#include "../lru_cache.h"
+#include "../fifo_cache.h"
 
 using namespace ::apache::thrift;
 using namespace ::apache::thrift::protocol;
@@ -20,7 +22,7 @@ using boost::shared_ptr;
 
 using namespace  ::proxyspace;
 
-random_cache cache();
+fifo_cache cache(0);
 
 
 class HTTPproxyHandler : virtual public HTTPproxyIf {

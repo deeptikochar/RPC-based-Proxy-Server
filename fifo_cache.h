@@ -1,7 +1,7 @@
 #ifndef fifo_cache_H
 #define fifo_cache_H
 
-ifndef CACHE_MAX_SIZE
+#ifndef CACHE_MAX_SIZE
 #define CACHE_MAX_SIZE 1048576
 #endif
 
@@ -16,7 +16,7 @@ class fifo_cache
 	int MAX_SIZE;
 	int size;
 	std::map<string, string> dictionary;
-	queue<string> fifo_queue;
+	std::queue<string> fifo_queue;
 
 	public:
 	fifo_cache();

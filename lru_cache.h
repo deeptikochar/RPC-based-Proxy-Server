@@ -1,7 +1,7 @@
 #ifndef lru_cache_H
 #define lru_cache_H
 
-ifndef CACHE_MAX_SIZE
+#ifndef CACHE_MAX_SIZE
 #define CACHE_MAX_SIZE 1048576
 #endif
 
