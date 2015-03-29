@@ -15,6 +15,11 @@ lru_cache::lru_cache(int max)
 	size = 0;
 }
 
+void lru_cache::cache_set_max(int max)
+{
+	MAX_SIZE = max;
+}
+
 int lru_cache::cache_isFull(int data_size)
 {
 	if(size + data_size > MAX_SIZE)

@@ -21,6 +21,7 @@ class lru_cache
 	lru_cache();
 	lru_cache(int max);
 
+	void cache_set_max(int max);						// Sets size of cache
 	int cache_fetch(string url, string &value);			// Returns 1 if found, sets value accordingly and moves to end of queue. Returns 0 if not present.
 	int cache_insert(string url, string value);			// Returns 1 if successful, 0 if not
 

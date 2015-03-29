@@ -22,6 +22,7 @@ class fifo_cache
 	fifo_cache();
 	fifo_cache(int max);
 
+	void cache_set_max(int max);					// Sets maximum cache size
 	int cache_fetch(string url, string &value);		// Returns 1 if found and sets value accordingly, 0 if not present.
 	int cache_insert(string url, string value);		// Returns 1 if successful, 0 if not
 

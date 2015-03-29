@@ -26,8 +26,9 @@ class random_cache
 	random_cache();
 	random_cache(size_t max);
 
-	int cache_fetch(string url, string &value);		// Returns 1 if found and sets value accordingly, 0 if not present.
-	int cache_insert(string url, string value);		// Returns 1 if successful, 0 if not
+	void cache_set_max(int max);							// Sets size of cache
+	int cache_fetch(string url, string &value);				// Returns 1 if found and sets value accordingly, 0 if not present.
+	int cache_insert(string url, string value);				// Returns 1 if successful, 0 if not
 
 	private:
 	int cache_isFull(size_t data_size);						// Returns 1 if full, 0 if not

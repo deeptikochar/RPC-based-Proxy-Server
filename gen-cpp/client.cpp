@@ -9,6 +9,11 @@
 #include <iostream>
 #include <fstream>
 #include <sys/time.h>
+#include <exception>
+#include <vector>
+#include <time.h>
+#include <cstdlib>
+
 using namespace apache::thrift;
 using namespace apache::thrift::protocol;
 using namespace apache::thrift::transport;
@@ -83,33 +88,103 @@ void statistics::tally(){
 }
 
 int main(int argc, char **argv) {
-  statistics stats;
+  statistics stats, stats1, stats2;
   boost::shared_ptr<TTransport> socket(new TSocket("localhost", 9090));
   boost::shared_ptr<TTransport> transport(new TBufferedTransport(socket));
   boost::shared_ptr<TProtocol> protocol(new TBinaryProtocol(transport));
   response serverResponse;
   HTTPproxyClient client(protocol);
-  try {
+  // try {
 	  
-	  transport->open();
-    std::ifstream infile("../url.list");
-    std::string entry;
-    while(infile>>entry){
-      stats.issue();
-  	  client.request(serverResponse, entry);
-      stats.receive(serverResponse.response_code);
-      std::cout<<"URL: "<<entry<<"\n";
-      //           "The returned response document is:\n"<<serverResponse.document;
-      // std::cout<<"\nResponse code : "<<serverResponse.response_code<<"\n";
-    }
-    infile.close();
-    client.shutdown();
-	  transport->close();
-  } catch (TException& tx) {
-  std::cout << "ERROR: " << tx.what() <<std::endl;
-  }
-  stats.tally();
+	 //  transport->open();
+  //   std::ifstream infile("../url.list");
+  //   std::string entry;
+  //   while(infile>>entry){
+  //     stats.issue();
+  // 	  client.request(serverResponse, entry);
+  //     stats.receive(serverResponse.response_code);
+  //     std::cout<<"URL: "<<entry<<"\n";
+  //     //           "The returned response document is:\n"<<serverResponse.document;
+  //     // std::cout<<"\nResponse code : "<<serverResponse.response_code<<"\n";
+  //   }
+  //   infile.close();
+  //   // client.shutdown();
+	 //  // transport->close();
+  // } catch (TException& tx) {
+  // std::cout << "ERROR: " << tx.what() <<std::endl;
+  // }
+  // stats.tally();
   // Check TException import and use !
+  std::vector<std::string> url_list;
+  int size = 0;
+  std::string url;
+  try  {
+      std::ifstream in("../small_list.txt");
+      while(in>>url) {
+        url_list.push_back(url);
+        size++;
+      }
+      in.close();
+    }
+  catch(...) {
+    std::cout<<"ERROR: File read"<<std::endl;
+  }
+  int NUM_LOOPS = 5000;
+  int index;
+  srand(time(NULL));
+  try {  
+    transport->open();
+
+    // Random sequence
+    for(int i = 0; i < NUM_LOOPS; i++)
+    {
+      index = rand() % size;
+      url = url_list[index];
+      stats1.issue();
+      client.request(serverResponse, url);
+      stats1.receive(serverResponse.response_code);
+      std::cout<<"URL: "<<url<<"\n";
+
+    }
+    std::cout<<"Random sequence:\n";
+    stats1.tally();
+
+    // Repeated sequence
+    int repeat1, repeat2, repeat3; 
+    for(int i = 0; i < NUM_LOOPS; i++)
+    {
+        if(i % 50 == 0)
+        {
+            repeat1 = rand() % size;
+            repeat2 = rand() % size;
+            repeat3 = rand() % size;
+            while(repeat1 == repeat2)
+                repeat2 = rand() % size;
+            while(repeat3 == repeat1 || repeat3 == repeat2)
+                repeat3 = rand() % size;
+        }
+        index = i % size;
+        if(i % 5 == 0)
+            index = repeat1;
+        else if (i % 3 == 0)
+            index = repeat2;
+        else if(i % 7 == 0)
+            index = repeat3;
+        url = url_list[index];
+        stats2.issue();
+        client.request(serverResponse, url);
+        stats2.receive(serverResponse.response_code);
+        std::cout<<"URL: "<<url<<"\n";
+    }
+    std::cout<<"Repeated sequence:\n";
+    stats2.tally();
+
+  } catch(TException tx) {
+    std::cout << "ERROR: " << tx.what() <<std::endl;
+  }
+  
+
+
   return 0;
 }
 

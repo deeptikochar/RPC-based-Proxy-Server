@@ -23,6 +23,14 @@ random_cache::random_cache(size_t max)
 	srand(time(NULL));
 }
 
+void random_cache::cache_set_max(int max)
+{
+	MAX_SIZE = max;
+	MAX_NUM_ENTRIES = max/MIN_FILE_SIZE;
+	delete [] urls;
+	urls = new string[MAX_NUM_ENTRIES];
+}
+
 int random_cache::cache_isFull(size_t data_size)
 {
 	cout<<"In cache_isFull"<<endl;

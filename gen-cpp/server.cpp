@@ -22,8 +22,17 @@ using boost::shared_ptr;
 
 using namespace  ::proxyspace;
 
-fifo_cache cache(0);
+#ifdef RANDOM
+random_cache cache;
+#endif
 
+#ifdef FIFO
+fifo_cache cache;
+#endif
+
+#ifdef LRU
+lru_cache cache;
+#endif
 
 class HTTPproxyHandler : virtual public HTTPproxyIf {
  public:
@@ -84,6 +93,13 @@ class HTTPproxyHandler : virtual public HTTPproxyIf {
 };
 
 int main(int argc, char **argv) {
+  int size;
+  if (argc == 2)
+  {
+    size = atoi(argv[1]);
+    cache.cache_set_max(size);
+    cout<<"Cache size set to: "<<size<<endl;
+  }
   int port = 9090;
   shared_ptr<HTTPproxyHandler> handler(new HTTPproxyHandler());
   shared_ptr<TProcessor> processor(new HTTPproxyProcessor(handler));
