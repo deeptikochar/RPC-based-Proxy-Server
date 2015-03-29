@@ -1,7 +1,7 @@
 #ifndef random_cache_H
 #define random_cache_H
 
-ifndef CACHE_MAX_SIZE
+#ifndef CACHE_MAX_SIZE
 #define CACHE_MAX_SIZE 1048576
 #endif
 

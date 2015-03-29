@@ -75,7 +75,7 @@ int random_cache::cache_remove(int index)
 	cout<<"In cache_remove"<<endl;
 	string url = urls[index];
 	string temp;
-	if(cache_fetch(url, &temp) == 0)
+	if(cache_fetch(url, temp) == 0)
 		return 0;
 	size = size - temp.length();
 	

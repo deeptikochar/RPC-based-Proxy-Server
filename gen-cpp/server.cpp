@@ -20,7 +20,7 @@ using boost::shared_ptr;
 
 using namespace  ::proxyspace;
 
-random_cache cache(70000);
+random_cache cache();
 
 
 class HTTPproxyHandler : virtual public HTTPproxyIf {
@@ -37,35 +37,39 @@ class HTTPproxyHandler : virtual public HTTPproxyIf {
     2 - Cache miss. Cache updated with document.
     3 - Cache miss. Curl fetch successful but document cannot fit in cache. 
     */
-    _return.response_code = 7;
-    wd_in cache_entry;
-    if(cache.cache_fetch(url, &cache_entry))
+    _return.response_code = 0;
+    std::string cache_entry;
+    if(cache.cache_fetch(url, cache_entry))
     {
         _return.response_code = 1;
-        _return.document = cache_entry.data;
+        _return.document = cache_entry;
     }
     else
     {
-        if(fetch_url(url,cache_entry))
+      std::cout<<"Just before fetch_url\n";
+        if(fetch_url(url, cache_entry))
         {
+          std::cout<<"In fetch_url\n";
           _return.response_code = 0;
           _return.document = "";
         }
         else
         {
+          std::cout<<"Before cache_insert\n";
            if(cache.cache_insert(url, cache_entry))
           {
+            std::cout<<"After cache_insert\n";
             _return.response_code = 2;
-            _return.document = cache_entry.data;        }
+            _return.document = cache_entry;        }
           else
           {
+            std::cout<<"Can't insert in cache\n";
             _return.response_code = 3;
-            _return.document = cache_entry.data;
+            _return.document = cache_entry;
           }
         }
     }
-    /*Free curl data buffer*/
-    free(cache_entry.data);
+
     std::cout<<"Requested URL is : "<<url<<"\n";
   }
 
