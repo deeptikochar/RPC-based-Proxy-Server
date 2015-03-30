@@ -23,12 +23,10 @@ int fetch_url(std::string input_url, std::string& curl_return) {
   CURL *curl;
   CURLcode res;
   struct wd_in wdi;
-  std::cout<<"a\n";
   memset(&wdi, 0, sizeof(wdi));
 
   /* Get a curl handle.  Each thread will need a unique handle. */
   curl = curl_easy_init();
-  std::cout<<"b\n"<<input_url<<"\n";
   if(NULL != curl) {
     wdi.size = 1024;
     /* Check for malloc failure in real code. */
@@ -42,16 +40,13 @@ int fetch_url(std::string input_url, std::string& curl_return) {
     /* "write_data" function to call with returned data. */
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
     /* userp parameter passed to write_data. */
-    std::cout<<"d\n";
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &wdi);
     /* Actually perform the query. */
-    std::cout<<"e\n";
     res = curl_easy_perform(curl);
     /* Check the return value and do whatever. */
 
     /* Clean up after ourselves. */
     curl_easy_cleanup(curl);
-    std::cout<<"c\n";
   }
   else {
     fprintf(stderr, "Error: could not get CURL handle.\n");
@@ -62,10 +57,9 @@ int fetch_url(std::string input_url, std::string& curl_return) {
      of the data available, so do whatever. */
 
   /* Write the content to stdout. */
-  std::cout<<"Before assigning curl OP to string\n";
   curl_return.assign(wdi.data, wdi.len);
-  printf("\nSize : %zu",wdi.size);
-  printf("\tLength : %zu \n",wdi.len);
+  // printf("\nSize : %zu",wdi.size);
+  // printf("\tLength : %zu \n",wdi.len);
   free(wdi.data);
   /* cleanup wdi.data buffer. */
   return res;

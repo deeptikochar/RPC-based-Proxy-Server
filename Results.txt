@@ -1,0 +1,1187 @@
+results (500 loops, 50 urls):
+
+Random
+------------
+0.5MB
+-----
+random:
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 50
+Miss count = 417
+Cache capacity exceed count = 15
+Failed requests = 18
+
+Hit-data size = 4018799
+Miss-data size = 43009075
+Cache capacity exceed-data size = 9562178
+
+Total time = 644.884
+Average hit time = 0.0899962
+Average miss time = 1.37042
+Average exceed time = 3.44951
+Average failure time = 0.954307
+Overall average miss time = 1.44261
+
+==================  Key statistics  ==============
+Hit rate = 0.1
+Miss penalty = 1.35261
+Average access time (AAT) = 1.3023
+
+Data hit rate = 0.071016
+Miss penalty per kB = 0.0107348
+Average access time (AAT) per kB = 0.0110922
+==================================================
+
+rep:
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 124
+Miss count = 358
+Cache capacity exceed count = 6
+Failed requests = 12
+
+Hit-data size = 11482250
+Miss-data size = 44744035
+Cache capacity exceed-data size = 3824496
+
+Total time = 469.935
+Average hit time = 0.0556595
+Average miss time = 1.25726
+Average exceed time = 1.67671
+Average failure time = 0.239378
+Overall average miss time = 1.26418
+
+==================  Key statistics  ==============
+Hit rate = 0.248
+Miss penalty = 1.20852
+Average access time (AAT) = 0.957095
+
+Data hit rate = 0.191209
+Miss penalty per kB = 0.00887337
+Average access time (AAT) per kB = 0.00777779
+==================================================
+
+1 MB
+-----
+random:
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 76
+Miss count = 405
+Cache capacity exceed count = 0
+Failed requests = 19
+
+Hit-data size = 10911559
+Miss-data size = 54119210
+Cache capacity exceed-data size = 0
+
+Total time = 587.341
+Average hit time = 0.163766
+Average miss time = 1.41372
+Average exceed time = 0
+Average failure time = 0.123038
+Overall average miss time = 1.41372
+
+==================  Key statistics  ==============
+Hit rate = 0.152
+Miss penalty = 1.24996
+Average access time (AAT) = 1.21622
+
+Data hit rate = 0.167791
+Miss penalty per kB = 0.00943891
+Average access time (AAT) per kB = 0.00899579
+==================================================
+
+rep:
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 207
+Miss count = 267
+Cache capacity exceed count = 0
+Failed requests = 26
+
+Hit-data size = 31515277
+Miss-data size = 31837401
+Cache capacity exceed-data size = 0
+
+Total time = 380.706
+Average hit time = 0.148648
+Average miss time = 1.29567
+Average exceed time = 0
+Average failure time = 0.153535
+Overall average miss time = 1.29567
+
+==================  Key statistics  ==============
+Hit rate = 0.414
+Miss penalty = 1.14702
+Average access time (AAT) = 0.794756
+
+Data hit rate = 0.497458
+Miss penalty per kB = 0.0098896
+Average access time (AAT) per kB = 0.0059463
+==================================================
+
+2 MB
+-----
+random:
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 166
+Miss count = 305
+Cache capacity exceed count = 0
+Failed requests = 29
+
+Hit-data size = 17879487
+Miss-data size = 35950250
+Cache capacity exceed-data size = 0
+
+Total time = 426.05
+Average hit time = 0.0500492
+Average miss time = 1.13802
+Average exceed time = 0
+Average failure time = 2.43601
+Overall average miss time = 1.13802
+
+==================  Key statistics  ==============
+Hit rate = 0.332
+Miss penalty = 1.08797
+Average access time (AAT) = 0.754576
+
+Data hit rate = 0.332149
+Miss penalty per kB = 0.00919026
+Average access time (AAT) per kB = 0.0066024
+==================================================
+
+rep:
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 293
+Miss count = 190
+Cache capacity exceed count = 0
+Failed requests = 17
+
+Hit-data size = 21319733
+Miss-data size = 20056325
+Cache capacity exceed-data size = 0
+
+Total time = 265.373
+Average hit time = 0.0626274
+Average miss time = 1.23261
+Average exceed time = 0
+Average failure time = 0.754567
+Overall average miss time = 1.23261
+
+==================  Key statistics  ==============
+Hit rate = 0.586
+Miss penalty = 1.16998
+Average access time (AAT) = 0.522868
+
+Data hit rate = 0.515267
+Miss penalty per kB = 0.0108162
+Average access time (AAT) per kB = 0.00610366
+==================================================
+
+4 MB
+-----
+random:
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 312
+Miss count = 164
+Cache capacity exceed count = 0
+Failed requests = 24
+
+Hit-data size = 38377959
+Miss-data size = 19865026
+Cache capacity exceed-data size = 0
+
+Total time = 200.873
+Average hit time = 0.0685436
+Average miss time = 1.0456
+Average exceed time = 0
+Average failure time = 0.333711
+Overall average miss time = 1.0456
+
+==================  Key statistics  ==============
+Hit rate = 0.624
+Miss penalty = 0.977054
+Average access time (AAT) = 0.405176
+
+Data hit rate = 0.658928
+Miss penalty per kB = 0.00807492
+Average access time (AAT) per kB = 0.00331136
+==================================================
+rep:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 433
+Miss count = 51
+Cache capacity exceed count = 0
+Failed requests = 16
+
+Hit-data size = 52105337
+Miss-data size = 5451266
+Cache capacity exceed-data size = 0
+
+Total time = 84.2911
+Average hit time = 0.0713036
+Average miss time = 0.999573
+Average exceed time = 0
+Average failure time = 0.152399
+Overall average miss time = 0.999573
+
+==================  Key statistics  ==============
+Hit rate = 0.866
+Miss penalty = 0.92827
+Average access time (AAT) = 0.169117
+
+Data hit rate = 0.905289
+Miss penalty per kB = 0.00875909
+Average access time (AAT) per kB = 0.00142213
+==================================================
+
+8 MB
+-----
+random:
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 431
+Miss count = 48
+Cache capacity exceed count = 0
+Failed requests = 21
+
+Hit-data size = 54404107
+Miss-data size = 5596794
+Cache capacity exceed-data size = 0
+
+Total time = 96.3419
+Average hit time = 0.0815312
+Average miss time = 1.23558
+Average exceed time = 0
+Average failure time = 0.0901922
+Overall average miss time = 1.23558
+
+==================  Key statistics  ==============
+Hit rate = 0.862
+Miss penalty = 1.15405
+Average access time (AAT) = 0.197177
+
+Data hit rate = 0.906722
+Miss penalty per kB = 0.00995086
+Average access time (AAT) per kB = 0.00157411
+==================================================
+rep:
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 438
+Miss count = 40
+Cache capacity exceed count = 0
+Failed requests = 22
+
+Hit-data size = 37341204
+Miss-data size = 4150295
+Cache capacity exceed-data size = 0
+
+Total time = 81.7095
+Average hit time = 0.0515223
+Average miss time = 1.14308
+Average exceed time = 0
+Average failure time = 0.609983
+Overall average miss time = 1.14308
+
+==================  Key statistics  ==============
+Hit rate = 0.876
+Miss penalty = 1.09156
+Average access time (AAT) = 0.142866
+
+Data hit rate = 0.899972
+Miss penalty per kB = 0.0104125
+Average access time (AAT) per kB = 0.00164588
+==================================================
+16 MB
+-----
+random:
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 429
+Miss count = 48
+Cache capacity exceed count = 0
+Failed requests = 23
+
+Hit-data size = 49565959
+Miss-data size = 5646972
+Cache capacity exceed-data size = 0
+
+Total time = 80.5834
+Average hit time = 0.0565262
+Average miss time = 1.12261
+Average exceed time = 0
+Average failure time = 0.106458
+Overall average miss time = 1.12261
+
+==================  Key statistics  ==============
+Hit rate = 0.858
+Miss penalty = 1.06608
+Average access time (AAT) = 0.163805
+
+Data hit rate = 0.897724
+Miss penalty per kB = 0.00905307
+Average access time (AAT) per kB = 0.00141516
+==================================================
+rep:
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 431
+Miss count = 41
+Cache capacity exceed count = 0
+Failed requests = 28
+
+Hit-data size = 42970229
+Miss-data size = 4234934
+Cache capacity exceed-data size = 0
+
+Total time = 70.9414
+Average hit time = 0.0474825
+Average miss time = 1.17024
+Average exceed time = 0
+Average failure time = 0.0891615
+Overall average miss time = 1.17024
+
+==================  Key statistics  ==============
+Hit rate = 0.862
+Miss penalty = 1.12276
+Average access time (AAT) = 0.14501
+
+Data hit rate = 0.910287
+Miss penalty per kB = 0.0108533
+Average access time (AAT) per kB = 0.00144994
+==================================================
+
+FIFO
+------------
+0.5 MB
+-----
+random:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 42
+Miss count = 428
+Cache capacity exceed count = 9
+Failed requests = 21
+
+Hit-data size = 3050248
+Miss-data size = 47958540
+Cache capacity exceed-data size = 5735599
+
+Total time = 593.011
+Average hit time = 0.0519783
+Average miss time = 1.18171
+Average exceed time = 2.14694
+Average failure time = 3.13027
+Overall average miss time = 1.20158
+
+==================  Key statistics  ==============
+Hit rate = 0.084
+Miss penalty = 1.14961
+Average access time (AAT) = 1.10078
+
+Data hit rate = 0.0537542
+Miss penalty per kB = 0.00906361
+Average access time (AAT) per kB = 0.00929212
+==================================================
+
+rep:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 159
+Miss count = 323
+Cache capacity exceed count = 6
+Failed requests = 12
+
+Hit-data size = 10588158
+Miss-data size = 31019414
+Cache capacity exceed-data size = 3824672
+
+Total time = 368.284
+Average hit time = 0.0571585
+Average miss time = 1.07498
+Average exceed time = 1.83346
+Average failure time = 0.0812728
+Overall average miss time = 1.08882
+
+==================  Key statistics  ==============
+Hit rate = 0.318
+Miss penalty = 1.03166
+Average access time (AAT) = 0.752682
+
+Data hit rate = 0.233054
+Miss penalty per kB = 0.00942233
+Average access time (AAT) per kB = 0.00808476
+==================================================
+
+1 MB
+-----
+random:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 75
+Miss count = 411
+Cache capacity exceed count = 0
+Failed requests = 14
+
+Hit-data size = 7091135
+Miss-data size = 46691003
+Cache capacity exceed-data size = 0
+
+Total time = 442.229
+Average hit time = 0.0642732
+Average miss time = 1.05671
+Average exceed time = 0
+Average failure time = 0.221355
+Overall average miss time = 1.05671
+
+==================  Key statistics  ==============
+Hit rate = 0.15
+Miss penalty = 0.99244
+Average access time (AAT) = 0.903559
+
+Data hit rate = 0.131849
+Miss penalty per kB = 0.00862198
+Average access time (AAT) per kB = 0.00816497
+==================================================
+
+rep:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 202
+Miss count = 286
+Cache capacity exceed count = 0
+Failed requests = 12
+
+Hit-data size = 19729810
+Miss-data size = 34061304
+Cache capacity exceed-data size = 0
+
+Total time = 318.627
+Average hit time = 0.0663852
+Average miss time = 1.05907
+Average exceed time = 0
+Average failure time = 0.193565
+Overall average miss time = 1.05907
+
+==================  Key statistics  ==============
+Hit rate = 0.404
+Miss penalty = 0.992685
+Average access time (AAT) = 0.648164
+
+Data hit rate = 0.366786
+Miss penalty per kB = 0.00821294
+Average access time (AAT) per kB = 0.00588023
+==================================================
+
+
+2 MB
+-----
+random:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 152
+Miss count = 330
+Cache capacity exceed count = 0
+Failed requests = 18
+
+Hit-data size = 16973832
+Miss-data size = 43499446
+Cache capacity exceed-data size = 0
+
+Total time = 411.585
+Average hit time = 0.0724651
+Average miss time = 1.20609
+Average exceed time = 0
+Average failure time = 0.14222
+Overall average miss time = 1.20609
+
+==================  Key statistics  ==============
+Hit rate = 0.304
+Miss penalty = 1.13363
+Average access time (AAT) = 0.8486
+
+Data hit rate = 0.280683
+Miss penalty per kB = 0.00850086
+Average access time (AAT) per kB = 0.00676373
+==================================================
+
+rep:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 244
+Miss count = 223
+Cache capacity exceed count = 0
+Failed requests = 33
+
+Hit-data size = 31641129
+Miss-data size = 25725468
+Cache capacity exceed-data size = 0
+
+Total time = 339.417
+Average hit time = 0.0904012
+Average miss time = 1.26845
+Average exceed time = 0
+Average failure time = 1.04532
+Overall average miss time = 1.26845
+
+==================  Key statistics  ==============
+Hit rate = 0.488
+Miss penalty = 1.17805
+Average access time (AAT) = 0.652937
+
+Data hit rate = 0.55156
+Miss penalty per kB = 0.0102983
+Average access time (AAT) per kB = 0.00531532
+==================================================
+
+4 MB
+-----
+random:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 325
+Miss count = 148
+Cache capacity exceed count = 0
+Failed requests = 27
+
+Hit-data size = 36134011
+Miss-data size = 16717811
+Cache capacity exceed-data size = 0
+
+Total time = 198.815
+Average hit time = 0.0665091
+Average miss time = 1.16334
+Average exceed time = 0
+Average failure time = 0.186107
+Overall average miss time = 1.16334
+
+==================  Key statistics  ==============
+Hit rate = 0.65
+Miss penalty = 1.09683
+Average access time (AAT) = 0.409704
+
+Data hit rate = 0.683685
+Miss penalty per kB = 0.00970067
+Average access time (AAT) per kB = 0.00366667
+==================================================
+
+rep:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 390
+Miss count = 61
+Cache capacity exceed count = 0
+Failed requests = 49
+
+Hit-data size = 34850918
+Miss-data size = 6221849
+Cache capacity exceed-data size = 0
+
+Total time = 102.778
+Average hit time = 0.0602203
+Average miss time = 1.10507
+Average exceed time = 0
+Average failure time = 0.242505
+Overall average miss time = 1.10507
+
+==================  Key statistics  ==============
+Hit rate = 0.78
+Miss penalty = 1.04485
+Average access time (AAT) = 0.201542
+
+Data hit rate = 0.848516
+Miss penalty per kB = 0.0101604
+Average access time (AAT) per kB = 0.00221303
+==================================================
+8 MB
+-----
+random:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 440
+Miss count = 48
+Cache capacity exceed count = 0
+Failed requests = 12
+
+Hit-data size = 52026443
+Miss-data size = 5648163
+Cache capacity exceed-data size = 0
+
+Total time = 114.457
+Average hit time = 0.105548
+Average miss time = 1.38367
+Average exceed time = 0
+Average failure time = 0.133292
+Overall average miss time = 1.38367
+
+==================  Key statistics  ==============
+Hit rate = 0.88
+Miss penalty = 1.27812
+Average access time (AAT) = 0.231265
+
+Data hit rate = 0.902068
+Miss penalty per kB = 0.0108663
+Average access time (AAT) per kB = 0.00195679
+==================================================
+
+rep:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 421
+Miss count = 40
+Cache capacity exceed count = 0
+Failed requests = 39
+
+Hit-data size = 42289841
+Miss-data size = 4156130
+Cache capacity exceed-data size = 0
+
+Total time = 101.654
+Average hit time = 0.0728758
+Average miss time = 1.65626
+Average exceed time = 0
+Average failure time = 0.121085
+Overall average miss time = 1.65626
+
+==================  Key statistics  ==============
+Hit rate = 0.842
+Miss penalty = 1.58339
+Average access time (AAT) = 0.210263
+
+Data hit rate = 0.910517
+Miss penalty per kB = 0.0152149
+Average access time (AAT) per kB = 0.00208697
+==================================================
+
+16 MB
+-----
+random:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 431
+Miss count = 48
+Cache capacity exceed count = 0
+Failed requests = 21
+
+Hit-data size = 44609230
+Miss-data size = 5568315
+Cache capacity exceed-data size = 0
+
+Total time = 91.6145
+Average hit time = 0.0488354
+Average miss time = 1.42605
+Average exceed time = 0
+Average failure time = 0.100775
+Overall average miss time = 1.42605
+
+==================  Key statistics  ==============
+Hit rate = 0.862
+Miss penalty = 1.37721
+Average access time (AAT) = 0.186844
+
+Data hit rate = 0.889028
+Miss penalty per kB = 0.011821
+Average access time (AAT) per kB = 0.00178363
+==================================================
+
+rep:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 425
+Miss count = 44
+Cache capacity exceed count = 0
+Failed requests = 31
+
+Hit-data size = 47659939
+Miss-data size = 5082602
+Cache capacity exceed-data size = 0
+
+Total time = 67.8595
+Average hit time = 0.0540514
+Average miss time = 0.953153
+Average exceed time = 0
+Average failure time = 0.0951255
+Overall average miss time = 0.953153
+
+==================  Key statistics  ==============
+Hit rate = 0.85
+Miss penalty = 0.899101
+Average access time (AAT) = 0.138402
+
+Data hit rate = 0.903634
+Miss penalty per kB = 0.00776943
+Average access time (AAT) per kB = 0.00123071
+==================================================
+
+LRU
+------------
+0.5 MB
+-----
+random:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 44
+Miss count = 420
+Cache capacity exceed count = 13
+Failed requests = 23
+
+Hit-data size = 3746712
+Miss-data size = 42738140
+Cache capacity exceed-data size = 8287268
+
+Total time = 479.005
+Average hit time = 0.0905282
+Average miss time = 1.06494
+Average exceed time = 1.90894
+Average failure time = 0.127469
+Overall average miss time = 1.09028
+
+==================  Key statistics  ==============
+Hit rate = 0.088
+Miss penalty = 0.99975
+Average access time (AAT) = 0.998058
+
+Data hit rate = 0.0684055
+Miss penalty per kB = 0.00818894
+Average access time (AAT) per kB = 0.0086919
+==================================================
+
+rep:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 163
+Miss count = 305
+Cache capacity exceed count = 6
+Failed requests = 26
+
+Hit-data size = 19488096
+Miss-data size = 34716653
+Cache capacity exceed-data size = 3824964
+
+Total time = 424.712
+Average hit time = 0.103137
+Average miss time = 1.28413
+Average exceed time = 1.99374
+Average failure time = 0.164566
+Overall average miss time = 1.29782
+
+==================  Key statistics  ==============
+Hit rate = 0.326
+Miss penalty = 1.19468
+Average access time (AAT) = 0.88699
+
+Data hit rate = 0.33583
+Miss penalty per kB = 0.00960972
+Average access time (AAT) per kB = 0.00724514
+==================================================
+
+
+1 MB
+-----
+random:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 82
+Miss count = 391
+Cache capacity exceed count = 0
+Failed requests = 27
+
+Hit-data size = 8821833
+Miss-data size = 46552767
+Cache capacity exceed-data size = 0
+
+Total time = 411.41
+Average hit time = 0.0653291
+Average miss time = 1.02777
+Average exceed time = 0
+Average failure time = 0.155295
+Overall average miss time = 1.02777
+
+==================  Key statistics  ==============
+Hit rate = 0.164
+Miss penalty = 0.962445
+Average access time (AAT) = 0.860923
+
+Data hit rate = 0.159312
+Miss penalty per kB = 0.00802511
+Average access time (AAT) per kB = 0.00735385
+==================================================
+
+rep:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 244
+Miss count = 242
+Cache capacity exceed count = 0
+Failed requests = 14
+
+Hit-data size = 27070053
+Miss-data size = 25959820
+Cache capacity exceed-data size = 0
+
+Total time = 338.01
+Average hit time = 0.0643044
+Average miss time = 1.07114
+Average exceed time = 0
+Average failure time = 4.50746
+Overall average miss time = 1.07114
+
+==================  Key statistics  ==============
+Hit rate = 0.488
+Miss penalty = 1.00683
+Average access time (AAT) = 0.565649
+
+Data hit rate = 0.510468
+Miss penalty per kB = 0.00940563
+Average access time (AAT) per kB = 0.00518397
+==================================================
+
+2 MB
+-----
+random:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 171
+Miss count = 311
+Cache capacity exceed count = 0
+Failed requests = 18
+
+Hit-data size = 21274484
+Miss-data size = 36132299
+Cache capacity exceed-data size = 0
+
+Total time = 396.941
+Average hit time = 0.0668573
+Average miss time = 1.16001
+Average exceed time = 0
+Average failure time = 1.37472
+Overall average miss time = 1.16001
+
+==================  Key statistics  ==============
+Hit rate = 0.342
+Miss penalty = 1.09315
+Average access time (AAT) = 0.77219
+
+Data hit rate = 0.370592
+Miss penalty per kB = 0.00944712
+Average access time (AAT) per kB = 0.00648348
+==================================================
+
+rep:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 277
+Miss count = 200
+Cache capacity exceed count = 0
+Failed requests = 23
+
+Hit-data size = 26549907
+Miss-data size = 21442588
+Cache capacity exceed-data size = 0
+
+Total time = 314.295
+Average hit time = 0.0625509
+Average miss time = 1.31687
+Average exceed time = 0
+Average failure time = 1.46062
+Overall average miss time = 1.31687
+
+==================  Key statistics  ==============
+Hit rate = 0.554
+Miss penalty = 1.25432
+Average access time (AAT) = 0.588471
+
+Data hit rate = 0.55321
+Miss penalty per kB = 0.0116301
+Average access time (AAT) per kB = 0.00584884
+==================================================
+
+4 MB
+-----
+random:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 354
+Miss count = 120
+Cache capacity exceed count = 0
+Failed requests = 26
+
+Hit-data size = 38495334
+Miss-data size = 15643243
+Cache capacity exceed-data size = 0
+
+Total time = 177.421
+Average hit time = 0.0713784
+Average miss time = 1.24492
+Average exceed time = 0
+Average failure time = 0.106258
+Overall average miss time = 1.24492
+
+==================  Key statistics  ==============
+Hit rate = 0.708
+Miss penalty = 1.17354
+Average access time (AAT) = 0.368477
+
+Data hit rate = 0.711052
+Miss penalty per kB = 0.00889343
+Average access time (AAT) per kB = 0.00322613
+==================================================
+
+rep:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 399
+Miss count = 85
+Cache capacity exceed count = 0
+Failed requests = 16
+
+Hit-data size = 52544583
+Miss-data size = 8780638
+Cache capacity exceed-data size = 0
+
+Total time = 159.413
+Average hit time = 0.129254
+Average miss time = 1.24283
+Average exceed time = 0
+Average failure time = 0.137509
+Overall average miss time = 1.24283
+
+==================  Key statistics  ==============
+Hit rate = 0.798
+Miss penalty = 1.11358
+Average access time (AAT) = 0.324821
+
+Data hit rate = 0.856818
+Miss penalty per kB = 0.0110496
+Average access time (AAT) per kB = 0.0025636
+==================================================
+
+8 MB
+-----
+random:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 428
+Miss count = 48
+Cache capacity exceed count = 0
+Failed requests = 24
+
+Hit-data size = 47036794
+Miss-data size = 5644825
+Cache capacity exceed-data size = 0
+
+Total time = 93.1389
+Average hit time = 0.0566623
+Average miss time = 1.38693
+Average exceed time = 0
+Average failure time = 0.0964383
+Overall average miss time = 1.38693
+
+==================  Key statistics  ==============
+Hit rate = 0.856
+Miss penalty = 1.33027
+Average access time (AAT) = 0.190807
+
+Data hit rate = 0.89285
+Miss penalty per kB = 0.011278
+Average access time (AAT) per kB = 0.00172402
+==================================================
+
+
+rep:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 430
+Miss count = 44
+Cache capacity exceed count = 0
+Failed requests = 26
+
+Hit-data size = 47922797
+Miss-data size = 5105374
+Cache capacity exceed-data size = 0
+
+Total time = 71.3065
+Average hit time = 0.0569483
+Average miss time = 1.01395
+Average exceed time = 0
+Average failure time = 0.0848055
+Overall average miss time = 1.01395
+
+==================  Key statistics  ==============
+Hit rate = 0.86
+Miss penalty = 0.957002
+Average access time (AAT) = 0.145784
+
+Data hit rate = 0.903723
+Miss penalty per kB = 0.00822762
+Average access time (AAT) per kB = 0.00130311
+==================================================
+
+
+16 MB
+-----
+random:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 436
+Miss count = 48
+Cache capacity exceed count = 0
+Failed requests = 16
+
+Hit-data size = 51593121
+Miss-data size = 5604401
+Cache capacity exceed-data size = 0
+
+Total time = 103.281
+Average hit time = 0.0740058
+Average miss time = 1.37049
+Average exceed time = 0
+Average failure time = 0.326951
+Overall average miss time = 1.37049
+
+==================  Key statistics  ==============
+Hit rate = 0.872
+Miss penalty = 1.29648
+Average access time (AAT) = 0.202583
+
+Data hit rate = 0.902017
+Miss penalty per kB = 0.0111124
+Average access time (AAT) per kB = 0.00171424
+==================================================
+
+
+rep:
+
+==================================================
+==================  Run statistics  ==============
+==================================================
+Total requests = 500
+Hit count = 420
+Miss count = 42
+Cache capacity exceed count = 0
+Failed requests = 38
+
+Hit-data size = 52259992
+Miss-data size = 4253374
+Cache capacity exceed-data size = 0
+
+Total time = 70.1142
+Average hit time = 0.0562631
+Average miss time = 1.03402
+Average exceed time = 0
+Average failure time = 0.0803942
+Overall average miss time = 1.03402
+
+==================  Key statistics  ==============
+Hit rate = 0.84
+Miss penalty = 0.977754
+Average access time (AAT) = 0.14515
+
+Data hit rate = 0.924737
+Miss penalty per kB = 0.00975824
+Average access time (AAT) per kB = 0.00118661
+==================================================
+
+
+

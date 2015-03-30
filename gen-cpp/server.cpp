@@ -50,6 +50,7 @@ class HTTPproxyHandler : virtual public HTTPproxyIf {
     */
     _return.response_code = 0;
     std::string cache_entry;
+    std::cout<<"Requested URL: "<<url<<"\n";
     if(cache.cache_fetch(url, cache_entry))
     {
         _return.response_code = 1;
@@ -57,31 +58,25 @@ class HTTPproxyHandler : virtual public HTTPproxyIf {
     }
     else
     {
-      std::cout<<"Just before fetch_url\n";
         if(fetch_url(url, cache_entry))
         {
-          std::cout<<"In fetch_url\n";
           _return.response_code = 0;
           _return.document = "";
         }
         else
         {
-          std::cout<<"Before cache_insert\n";
            if(cache.cache_insert(url, cache_entry))
           {
-            std::cout<<"After cache_insert\n";
             _return.response_code = 2;
             _return.document = cache_entry;        }
           else
           {
-            std::cout<<"Can't insert in cache\n";
             _return.response_code = 3;
             _return.document = cache_entry;
           }
         }
     }
 
-    std::cout<<"Requested URL is : "<<url<<"\n";
   }
 
   void shutdown() {

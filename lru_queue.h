@@ -2,10 +2,13 @@
 #define lru_queue_H
 
 #include <string>
+
 using namespace std;
+
 struct queue_element
 {
 	string url;
+	string data;
 	queue_element *prev;
 	queue_element *next;
 	queue_element()
@@ -22,7 +25,8 @@ class queue
 
 	public:
 	queue();
-	string front();
+	int front_size();
+	string front_url();
 	void push(queue_element *node);
 	void pop();
 	int send_to_end(queue_element *node);

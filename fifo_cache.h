@@ -22,15 +22,15 @@ class fifo_cache
 	fifo_cache();
 	fifo_cache(int max);
 
-	void cache_set_max(int max);					// Sets maximum cache size
-	int cache_fetch(string url, string &value);		// Returns 1 if found and sets value accordingly, 0 if not present.
-	int cache_insert(string url, string value);		// Returns 1 if successful, 0 if not
+	void cache_set_max(int max);							// Sets maximum cache size
+	int cache_fetch(string url, string &value);				// Returns 1 if found and sets value accordingly, 0 if not present.
+	int cache_insert(string url, string value);				// Returns 1 if successful, 0 if not
 
 	private:
-	int cache_isFull(int data_size);
+	int cache_isFull(int data_size);						// Returns 1 if not enough space for new item on cache, 0 otherwise
 	int cache_find(string url);                         	// Returns 1 if found, 0 if not
 	int cache_remove(string url);							// Returns 1 if successful. 0 if not
-	string cache_decideReplace();
+	string cache_decideReplace();							// Decides which item to replace
 };
 
 #endif

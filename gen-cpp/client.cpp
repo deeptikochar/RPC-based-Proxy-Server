@@ -107,32 +107,12 @@ int main(int argc, char **argv) {
   boost::shared_ptr<TProtocol> protocol(new TBinaryProtocol(transport));
   response serverResponse;
   HTTPproxyClient client(protocol);
-  // try {
-	  
-	 //  transport->open();
-  //   std::ifstream infile("../url.list");
-  //   std::string entry;
-  //   while(infile>>entry){
-  //     stats.issue();
-  // 	  client.request(serverResponse, entry);
-  //     stats.receive(serverResponse.response_code);
-  //     std::cout<<"URL: "<<entry<<"\n";
-  //     //           "The returned response document is:\n"<<serverResponse.document;
-  //     // std::cout<<"\nResponse code : "<<serverResponse.response_code<<"\n";
-  //   }
-  //   infile.close();
-  //   // client.shutdown();
-	 //  // transport->close();
-  // } catch (TException& tx) {
-  // std::cout << "ERROR: " << tx.what() <<std::endl;
-  // }
-  // stats.tally();
-  // Check TException import and use !
+
   std::vector<std::string> url_list;
   int size = 0;
   std::string url;
   try  {
-      std::ifstream in("../url.list");
+      std::ifstream in("url.list");
       while(in>>url) {
         url_list.push_back(url);
         size++;
@@ -172,7 +152,7 @@ int main(int argc, char **argv) {
       }
       stats.tally();
     }
-    if(seq == 2){             // Random sequence
+    if(seq == 2){             // Repetitivesequence
       std::cout<<"Using access sequence : Staggered repetition\n";
       int repeat1, repeat2, repeat3; 
       for(int i = 0; i < NUM_LOOPS; i++)

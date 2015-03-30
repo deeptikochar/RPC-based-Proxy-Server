@@ -26,11 +26,9 @@ class lru_cache
 	int cache_insert(string url, string value);			// Returns 1 if successful, 0 if not
 
 	private:
-	int cache_isFull(int data_size);
+	int cache_isFull(int data_size);					// Returns 1 if not enough space for new item on cache, 0 otherwise
 	int cache_find(string url);                        	// Returns 1 if found, 0 if not
-	int cache_get(string url, string &value);			// Returns 1 if found and sets value accordingly, 0 if not present.
-	int cache_remove(string url);						// Returns 1 if successful. 0 if not
-	string cache_decideReplace();
+	int cache_remove();									// Returns 1 if successful. 0 if not
 };
 
 #endif
