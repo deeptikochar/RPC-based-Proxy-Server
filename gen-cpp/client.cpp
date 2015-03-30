@@ -27,24 +27,29 @@ private:
   long miss_count;        // Cache miss. Added to cache.
   long fail_count;        // Curl failed to fetch document.
   long cap_exceed_count;  // Cache miss. Document exceeds cache size.
+
+  long hit_size;         // Data size for cache hits.
+  long miss_size;        // Data size for cache misses which were dded to cache.
+  long cap_exceed_size;  // Data size for cache misses which exceeded cache size.
+
   double hit_time, miss_time, fail_time, exceed_time;
   double time_int;        // To measure time interval in ms.
 public:
   statistics();
   void issue();
-  void receive(int response);
+  void receive(int response, long rcv_size);
   void tally();
 };
 
 statistics::statistics(){
-  hit_count=miss_count=fail_count=cap_exceed_count=0L;
+  hit_count=miss_count=fail_count=cap_exceed_count=hit_size=miss_size=cap_exceed_size=0L;
   hit_time=miss_time=fail_time=exceed_time=0;
 }
 void statistics::issue(){
   gettimeofday(&tim, NULL);  
     time_int = tim.tv_sec+(tim.tv_usec/1000000.0); 
 }
-void statistics::receive(int response){
+void statistics::receive(int response, long rcv_size){
   gettimeofday(&tim, NULL);  
     time_int = (tim.tv_sec+(tim.tv_usec/1000000.0)) - time_int;
     switch(response){
@@ -54,14 +59,17 @@ void statistics::receive(int response){
           break;
       case 1 : 
           hit_count++;
+          hit_size += rcv_size; 
           hit_time += time_int;
           break;
       case 2 : 
           miss_count++;
+          miss_size += rcv_size;
           miss_time += time_int;
           break;
       case 3 : 
           cap_exceed_count++;
+          cap_exceed_size += rcv_size;
           exceed_time += time_int;
           break;
     } 
@@ -74,7 +82,9 @@ void statistics::tally(){
   std::cout<<"\nHit count = "<<hit_count<<"\nMiss count = "<<miss_count;
   std::cout<<"\nCache capacity exceed count = "<<cap_exceed_count;
   std::cout<<"\nFailed requests = "<<fail_count<<"\n";
-  std::cout<<"\nTotal time = "<<hit_time+miss_time+exceed_time+fail_time;
+  std::cout<<"\nHit-data size = "<<hit_size<<"\nMiss-data size = "<<miss_size;
+  std::cout<<"\nCache capacity exceed-data size = "<<cap_exceed_size;
+  std::cout<<"\n\nTotal time = "<<hit_time+miss_time+exceed_time+fail_time;
   std::cout<<"\nAverage hit time = "<<((hit_count==0)? 0:(hit_time/hit_count));
   std::cout<<"\nAverage miss time = "<<((miss_count==0)? 0:(miss_time/miss_count));
   std::cout<<"\nAverage exceed time = "<<((cap_exceed_count==0)? 0:(exceed_time/cap_exceed_count));
@@ -84,12 +94,15 @@ void statistics::tally(){
              "Hit rate = "<<(float)hit_count/(hit_count+miss_count+fail_count+cap_exceed_count);
   std::cout<<"\nMiss penalty = "<<((miss_count+cap_exceed_count==0)? 0:(((miss_time + exceed_time)/(miss_count+cap_exceed_count))- ((hit_count==0)? 0:(hit_time/hit_count))));
   std::cout<<"\nAverage access time (AAT) = "<<(miss_time + exceed_time + hit_time)/ (miss_count+cap_exceed_count+hit_count);
+  std::cout<<"\n\nData hit rate = "<<(float)hit_size/(hit_size+miss_size+cap_exceed_size);
+  std::cout<<"\nMiss penalty per kB = "<<((miss_size+cap_exceed_size==0)? 0:((((miss_time + exceed_time)*1000)/(miss_size+cap_exceed_size))- ((hit_size==0)? 0:((hit_time*1000)/hit_size))));
+  std::cout<<"\nAverage access time (AAT) per kB = "<<((miss_time + exceed_time + hit_time)*1000)/ (miss_size+cap_exceed_size+hit_size);
   std::cout<<"\n==================================================\n\n";        
 }
 
 int main(int argc, char **argv) {
-  statistics stats, stats1, stats2;
-  boost::shared_ptr<TTransport> socket(new TSocket("localhost", 9090));
+  statistics stats;
+  boost::shared_ptr<TTransport> socket(new TSocket("10.0.0.27", 9090));
   boost::shared_ptr<TTransport> transport(new TBufferedTransport(socket));
   boost::shared_ptr<TProtocol> protocol(new TBinaryProtocol(transport));
   response serverResponse;
@@ -119,7 +132,7 @@ int main(int argc, char **argv) {
   int size = 0;
   std::string url;
   try  {
-      std::ifstream in("../small_list.txt");
+      std::ifstream in("../url.list");
       while(in>>url) {
         url_list.push_back(url);
         size++;
@@ -129,62 +142,72 @@ int main(int argc, char **argv) {
   catch(...) {
     std::cout<<"ERROR: File read"<<std::endl;
   }
-  int NUM_LOOPS = 5000;
+  int NUM_LOOPS = 100;
+  int seq = 1;
+  if (argc == 3)
+  {
+    NUM_LOOPS = atoi(argv[1]);
+    seq = atoi(argv[2]);
+  }
+  std::cout<<"Number of loops = "<<NUM_LOOPS<<"\n";
+  
   int index;
+  long doc_size;
   srand(time(NULL));
   try {  
     transport->open();
 
-    // Random sequence
-    for(int i = 0; i < NUM_LOOPS; i++)
-    {
-      index = rand() % size;
-      url = url_list[index];
-      stats1.issue();
-      client.request(serverResponse, url);
-      stats1.receive(serverResponse.response_code);
-      std::cout<<"URL: "<<url<<"\n";
-
-    }
-    std::cout<<"Random sequence:\n";
-    stats1.tally();
-
-    // Repeated sequence
-    int repeat1, repeat2, repeat3; 
-    for(int i = 0; i < NUM_LOOPS; i++)
-    {
-        if(i % 50 == 0)
-        {
-            repeat1 = rand() % size;
-            repeat2 = rand() % size;
-            repeat3 = rand() % size;
-            while(repeat1 == repeat2)
-                repeat2 = rand() % size;
-            while(repeat3 == repeat1 || repeat3 == repeat2)
-                repeat3 = rand() % size;
-        }
-        index = i % size;
-        if(i % 5 == 0)
-            index = repeat1;
-        else if (i % 3 == 0)
-            index = repeat2;
-        else if(i % 7 == 0)
-            index = repeat3;
+    if(seq == 1){             // Random sequence
+      std::cout<<"Using access sequence : Random\n";
+      for(int i = 0; i < NUM_LOOPS; i++)
+      {
+        index = rand() % size;
         url = url_list[index];
-        stats2.issue();
+        stats.issue();
         client.request(serverResponse, url);
-        stats2.receive(serverResponse.response_code);
+        doc_size = ((serverResponse.response_code==0)?0L:(long)serverResponse.document.length());
+        stats.receive(serverResponse.response_code, doc_size);
         std::cout<<"URL: "<<url<<"\n";
-    }
-    std::cout<<"Repeated sequence:\n";
-    stats2.tally();
 
+      }
+      stats.tally();
+    }
+    if(seq == 2){             // Random sequence
+      std::cout<<"Using access sequence : Staggered repetition\n";
+      int repeat1, repeat2, repeat3; 
+      for(int i = 0; i < NUM_LOOPS; i++)
+      {
+          if(i % 50 == 0)
+          {
+              repeat1 = rand() % size;
+              repeat2 = rand() % size;
+              repeat3 = rand() % size;
+              while(repeat1 == repeat2)
+                  repeat2 = rand() % size;
+              while(repeat3 == repeat1 || repeat3 == repeat2)
+                  repeat3 = rand() % size;
+          }
+          index = i % size;
+          if(i % 5 == 0)
+              index = repeat1;
+          else if (i % 3 == 0)
+              index = repeat2;
+          else if(i % 7 == 0)
+              index = repeat3;
+          url = url_list[index];
+          stats.issue();
+          client.request(serverResponse, url);
+          doc_size = ((serverResponse.response_code==0)?0L:(long)serverResponse.document.length());
+          stats.receive(serverResponse.response_code, doc_size);
+          std::cout<<"URL: "<<url<<"\n";
+      }
+      stats.tally();
+    }
   } catch(TException tx) {
     std::cout << "ERROR: " << tx.what() <<std::endl;
   }
-  
-
-
+  client.shutdown();
+  transport->close();
   return 0;
 }
 
